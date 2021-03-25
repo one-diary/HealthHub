@@ -5,6 +5,15 @@ var Post = require('../models/post');
 var Book = require('../models/book');
 const moment = require("moment")
 var mongodb = require("mongodb")
+var Steps = require('../models/steps');
+let Favourites = require('../models/favourites')
+const axios = require('axios');
+const {google} = require('googleapis')
+const request = require('request')
+const moment = require("moment")
+const urlParse = require('url-parse')
+const queryParse = require('query-string')
+const bodyParser = require("body-parser")
 
 function makeid(length) {
   var result           = '';
@@ -44,8 +53,6 @@ router.get('/post',isValidUser, async function(req,res,next){
   let user = await User.findOne({_id:req.user._id})
   res.render('post',{user})
 })
-
-
 
 router.post('/post', async function(req,res,next){
   var post= new Post({
@@ -128,6 +135,35 @@ router.post('/view',isValidUser, async function(req,res,next){
 router.get('/join',isValidUser, async function(req,res,next){
   let user = await User.findOne({_id:req.user._id})
   res.render('join',{user})
+})
+
+router.get('/recipes',isValidUser, async function(req,res,next){
+  let user = await User.findOne({_id:req.user._id})
+  return res.render('search',{user})
+})
+
+router.post('/recipes',isValidUser, async function(req,res,next){
+  let user = await User.findOne({_id:req.user._id})
+  var params = { 
+    'ingredients': req.body.query,
+    'number': 5, 
+    'ranking': 1, 
+    'ignorePantry': false 
+  };
+console.log(params)
+axios.get(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${process.env.SPOONACULAR_API_KEY}`,{
+  params: params
+})
+  .then(response => {
+    console.log(response)
+    let recipes = (response.data);
+    res.render("recipe-list",{user,recipes})
+  })
+  .catch(error => {
+    console.log(error);
+    res.render("search",{user})
+  });
+
 })
 
 function isValidUser(req,res,next){
