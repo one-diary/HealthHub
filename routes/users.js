@@ -183,6 +183,33 @@ axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${proces
   });
 })
 
+router.get('/favourite',isValidUser, async function(req,res,next){
+  let user = await User.findOne({_id:req.user._id})
+  let recipes = await Favourites.find({userid:req.user._id}).sort({_id:-1})
+  return res.render('favourites',{user, recipes})
+})
+
+router.post('/list', async function(req,res,next){
+  let favourited = await Favourites.findOne({id:req.body.id})
+  if (favourited)
+  res.redirect('/users/favourite')
+
+  var favourites= new Favourites({
+    id:req.body.id,
+    title:req.body.title,
+    userid:req.user._id,
+    image: req.body.image,
+  });
+  try{
+    doc=await favourites.save()
+    res.redirect('/users/favourite')
+  }
+  catch(err){
+    console.log(err)
+    res.redirect('/users/favourite')
+  }
+})
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
     next()
