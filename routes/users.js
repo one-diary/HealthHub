@@ -166,6 +166,23 @@ axios.get(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${proces
 
 })
 
+router.get('/single/:id',isValidUser, async function(req,res,next){
+  let id = req.params.id
+  let user = await User.findOne({_id:req.user._id})
+axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`)
+  .then(response => {
+    // let recipes = (response.data.results);
+    // res.render("recipe-list",{user,recipes})
+    console.log(response)
+     let recipe = (response.data);
+    res.render("single",{user,recipe})
+  })
+  .catch(error => {
+    console.log(error);
+    res.render("search",{user})
+  });
+})
+
 function isValidUser(req,res,next){
   if(req.isAuthenticated()){
     next()
