@@ -23,7 +23,7 @@ Making healthy lifestyle changes is easier said than done. Even when we're stron
 - The Community Forum: Make Healthy Changes and share tips, achievements and advice!
 
 ## Technology Stack
-![Languages](https://img.shields.io/github/languages/count/vrushti-mody/TheHealthCorner)
+![Languages](https://img.shields.io/github/languages/count/vrushti-mody/HealthHub)
 - Javascript
 - Node.js
 - MongoDB
