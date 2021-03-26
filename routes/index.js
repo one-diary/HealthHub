@@ -3,9 +3,8 @@ var router = express.Router();
 var User = require('../models/user');
 const passport = require('passport');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', );
+  res.render('index');
 });
 
 router.get('/login', function(req, res, next) {
@@ -20,7 +19,6 @@ router.get('/registerDoctor', function(req, res, next) {
   res.render('registerdoctor');
 });
 
- //Post Request on Register Page
 router.post('/register',function(req,res,next){
   console.log(req.body)
   if (req.body.password!==req.body.cpassword){
@@ -31,7 +29,6 @@ router.post('/register',function(req,res,next){
   } 
 })
 
-// Save Details to database 
 async function database(req,res){
   var user= new User({
     name:req.body.name,
@@ -44,16 +41,13 @@ async function database(req,res){
   try{
     doc=await user.save()
     return res.redirect('/login')
-    //return res.status(201).json(doc);
   }
   catch(err){
     return res.render('register',{"error":"Error saving data! Please try again"})
-    //return res.status(501).json(err);
   }
   
 }
 
-//Post Request on Register Page
 router.post('/registerDoctor',function(req,res,next){
   console.log(req.body)
   if (req.body.password!==req.body.cpassword){
@@ -64,7 +58,6 @@ router.post('/registerDoctor',function(req,res,next){
   } 
 })
 
-// Save Details to database 
 async function database1(req,res){
   var user= new User({
     name:req.body.name,
