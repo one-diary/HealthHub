@@ -47,7 +47,7 @@ passport.use('google',new GoogleStrategy({
                 email: profile.email,
                 password:User.hashPassword('pass@123'),
                 createdAt: Date.now(),
-                bio:'Hey there! I am a fitness enthusiast',
+                bio:'Hey there! I am a using HealthHub',
                 type:'patient'
                
             });
