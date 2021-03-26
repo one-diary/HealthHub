@@ -11,7 +11,6 @@ var schema = new mongoose.Schema({
     iframe:{type:String},
     sharableLink:{type:String},
     registration:{type:String},
-
 })
 
 schema.statics.hashPassword = function hashPassword(password){
