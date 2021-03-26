@@ -5,7 +5,7 @@
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/vrushti-mody/HealthHub/pulls)
 [![Issues](https://img.shields.io/github/issues-raw/vrushti-mody/HealthHub)](https://github.com/vrushti-mody/HealthHub/issues) 
 
-Making healthy lifestyle changes is easier said than done. Even when we're strongly motivated, adopting a new, healthy habit — or breaking an old, bad one — can be terribly difficult. Creating and maintaining healthy eating habits doesn’t have to be hard. If you start by incorporating small changes into your daily habits, you can make a big impact on your eating pattern and create lasting, healthy eating habits. The Health Corner wants to help you do just that!
+Making healthy lifestyle changes is easier said than done. Even when we're strongly motivated, adopting a new, healthy habit — or breaking an old, bad one — can be terribly difficult. Creating and maintaining healthy eating habits doesn’t have to be hard. If you start by incorporating small changes into your daily habits, you can make a big impact on your eating pattern and create lasting, healthy eating habits. HealthHub wants to help you do just that!
 
 ## How is this tool helpful?
 
