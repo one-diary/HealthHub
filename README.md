@@ -30,6 +30,7 @@ Making healthy lifestyle changes is easier said than done. Even when we're stron
 - Google Dialog Flow
 - Google Fit API
 - Spoonacular API
+- Socket.io
 
 
 ## Getting Started
