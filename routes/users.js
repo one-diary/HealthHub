@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Post = require('../models/post');
+var Blog = require('../models/blog');
 var Book = require('../models/book');
 const moment = require("moment")
 var Steps = require('../models/steps');
@@ -334,6 +335,59 @@ router.get("/steps", async (req,res)=>{
     console.log(e)
     res.render("tracker",{info:e, user})
   }
+})
+
+router.get('/blogpost',isValidUser, async function(req,res,next){
+  let user = await User.findOne({_id:req.user._id})
+  res.render('blogpost',{user})
+})
+
+router.post('/blogpost', async function(req,res,next){
+  var blog= new Blog({
+    userid:req.body.userid,
+    title: req.body.title,
+    body: req.body.body,
+    date: req.body.date,
+    mood: req.body.mood
+  });
+  try{
+    doc=await blog.save()
+    return res.redirect(`/users/mood`)
+    //return res.status(201).json(doc);
+  }
+  catch(err){
+    console.log(err)
+    return res.redirect('/users/blogpost')
+    //return res.status(501).json(err);
+  }
+})
+
+router.get('/mood',isValidUser, async(req,res,next) => {
+  let user = await User.findOne({_id:req.user._id})
+  let blogs = await Blog.find({userid:req.user._id}).sort({date:-1}).limit(50)
+  const today = moment();
+  const from_date = today.startOf('week');  
+  let emotions = await Blog.find({userid:req.user._id, date: { $gte: from_date }})
+  let happy =0, sad=0, fearful =0, disgusted=0, angry=0
+  for (let i=0; i<emotions.length; i++){
+    if(emotions[i].mood === 'Happy'){
+      happy = happy+1
+    }
+    else if(emotions[i].mood === 'Sad'){
+      sad = sad+1
+    }
+    else if(emotions[i].mood === 'Fearful'){
+      fearful = fearful+1
+    }
+    else if(emotions[i].mood === 'Disgusted'){
+      disgusted = disgusted+1
+    }
+    else if(emotions[i].mood === 'Angry'){
+      angry = angry+1
+    }
+
+  }
+  res.render('mood',{user, blogs, happy, sad, fearful,disgusted, angry})
 })
 
 function isValidUser(req,res,next){
