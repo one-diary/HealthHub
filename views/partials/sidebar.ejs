@@ -61,10 +61,22 @@
           </a>
         </li>
         <% if(user.type ==="patient") { %>
+          <li>
+            <a href="/users/blogpost">
+              <i class="tim-icons icon-sound-wave"></i>
+              <p>Retrospective Journal</p>
+            </a>
+          </li>
+          <li>
+            <a href="/users/mood">
+              <i class="tim-icons icon-chart-bar-32"></i>
+              <p>Mood Analysis</p>
+            </a>
+          </li>
         <li>
           <a href="/users/book">
             <i class="tim-icons icon-check-2"></i>
-            <p>Book a Sessiom</p>
+            <p>Book a Session</p>
           </a>
         </li>
         <% } %>
